@@ -4,7 +4,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'nyc_housing',
-  password: 'postgres',
+  password: 'yosemite',
   port: 5432,
 });
 
@@ -91,17 +91,17 @@ const properties = [
     description: 'Beautiful co-op near Prospect Park. Quiet tree-lined street with great community feel.'
   },
   {
-    address: '890 Court Street',
+    address: '890 Court Street, Apt 4C',
     neighborhood: 'Carroll Gardens',
     county: 'Brooklyn',
-    price: 595000,
-    bedrooms: 3,
-    bathrooms: 2,
-    square_feet: 1250,
-    property_type: 'Townhouse',
-    year_built: 1920,
+    price: 545000,
+    bedrooms: 2,
+    bathrooms: 1.5,
+    square_feet: 1050,
+    property_type: 'Condo',
+    year_built: 2010,
     image_url: 'placeholder-image-7.jpg',
-    description: 'Charming townhouse with original details. Private backyard and updated kitchen.'
+    description: 'Charming condo in historic Carroll Gardens. Updated finishes and original details.'
   },
   {
     address: '123 Atlantic Avenue, Unit 15F',
@@ -253,17 +253,17 @@ const properties = [
   
   // Staten Island Properties
   {
-    address: '890 Victory Boulevard',
+    address: '890 Victory Boulevard, Unit 5C',
     neighborhood: 'St. George',
     county: 'Staten Island',
-    price: 365000,
-    bedrooms: 3,
-    bathrooms: 2,
-    square_feet: 1300,
-    property_type: 'Single Family',
-    year_built: 1950,
+    price: 345000,
+    bedrooms: 2,
+    bathrooms: 1.5,
+    square_feet: 1100,
+    property_type: 'Condo',
+    year_built: 2008,
     image_url: 'placeholder-image-19.jpg',
-    description: 'Charming single-family home near ferry. Convenient commute to Manhattan.'
+    description: 'Waterfront condo near ferry terminal. Convenient commute to Manhattan with harbor views.'
   },
   {
     address: '123 Forest Avenue, Unit 2A',
@@ -279,30 +279,30 @@ const properties = [
     description: 'Comfortable condo in quiet neighborhood. Parking included, near shopping.'
   },
   {
-    address: '456 Hylan Boulevard',
+    address: '456 Hylan Boulevard, Apt 8B',
     neighborhood: 'Great Kills',
     county: 'Staten Island',
-    price: 415000,
-    bedrooms: 3,
-    bathrooms: 2.5,
-    square_feet: 1500,
-    property_type: 'Single Family',
-    year_built: 1985,
-    image_url: 'placeholder-image-21.jpg',
-    description: 'Spacious single-family with garage and yard. Near beach and parks.'
-  },
-  {
-    address: '789 Richmond Avenue',
-    neighborhood: 'New Springville',
-    county: 'Staten Island',
-    price: 385000,
+    price: 365000,
     bedrooms: 3,
     bathrooms: 2,
     square_feet: 1250,
-    property_type: 'Townhouse',
+    property_type: 'Co-op',
+    year_built: 1985,
+    image_url: 'placeholder-image-21.jpg',
+    description: 'Spacious co-op near beach and parks. Well-maintained building with low maintenance fees.'
+  },
+  {
+    address: '789 Richmond Avenue, Unit 12D',
+    neighborhood: 'New Springville',
+    county: 'Staten Island',
+    price: 355000,
+    bedrooms: 2,
+    bathrooms: 2,
+    square_feet: 1100,
+    property_type: 'Condo',
     year_built: 2005,
     image_url: 'placeholder-image-22.jpg',
-    description: 'Modern townhouse with finished basement. Near Staten Island Mall.'
+    description: 'Modern condo near Staten Island Mall. Updated kitchen and bathrooms.'
   },
   
   // Additional affordable options across boroughs

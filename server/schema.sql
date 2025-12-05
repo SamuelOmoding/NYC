@@ -47,5 +47,5 @@ CREATE INDEX idx_saved_properties_user_id ON saved_properties(user_id);
 
 -- Insert demo user
 INSERT INTO users (name, email, password) 
-VALUES ('Demo User', 'demo@demo.com', 'password123')
+VALUES ('John Doe', 'user@demo.com', 'password123')
 ON CONFLICT (email) DO NOTHING;
