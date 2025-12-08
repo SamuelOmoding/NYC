@@ -15,5 +15,12 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false
+  },
+  preview: {
+    // Allow your deployed Railway frontend host
+    allowedHosts: [
+      'genuine-freedom-production-62cb.up.railway.app',
+      'localhost' // Optional: allow local preview as well
+    ]
   }
 })
