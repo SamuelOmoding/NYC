@@ -2,7 +2,7 @@
 -- CREATE DATABASE nyc_housing;
 
 -- Connect to the database
-\c nyc_housing;
+\c railway;
 
 -- Users table
 CREATE TABLE IF NOT EXISTS users (
@@ -42,10 +42,10 @@ CREATE TABLE IF NOT EXISTS saved_properties (
 );
 
 -- Create indexes for better query performance
-CREATE INDEX idx_properties_price ON properties(price);
-CREATE INDEX idx_properties_county ON properties(county);
-CREATE INDEX idx_properties_bedrooms ON properties(bedrooms);
-CREATE INDEX idx_saved_properties_user_id ON saved_properties(user_id);
+CREATE INDEX IF NOT EXISTS idx_properties_price ON properties(price);
+CREATE INDEX IF NOT EXISTS idx_properties_county ON properties(county);
+CREATE INDEX IF NOT EXISTS idx_properties_bedrooms ON properties(bedrooms);
+CREATE INDEX IF NOT EXISTS idx_saved_properties_user_id ON saved_properties(user_id);
 
 -- Insert demo user
 INSERT INTO users (name, email, password) 
