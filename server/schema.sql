@@ -25,6 +25,8 @@ CREATE TABLE IF NOT EXISTS properties (
     square_feet INTEGER,
     property_type VARCHAR(100),
     year_built INTEGER,
+    latitude DECIMAL(10, 7),
+    longitude DECIMAL(10, 7),
     image_url VARCHAR(500),
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -47,5 +49,5 @@ CREATE INDEX idx_saved_properties_user_id ON saved_properties(user_id);
 
 -- Insert demo user
 INSERT INTO users (name, email, password) 
-VALUES ('John Doe', 'user@demo.com', 'password123')
+VALUES ('Demo User_1', 'demo@demo.com', 'password123')
 ON CONFLICT (email) DO NOTHING;

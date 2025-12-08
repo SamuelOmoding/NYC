@@ -3,7 +3,7 @@ import { Home, Calculator, Search, Map, BarChart3, User, LogOut, Menu, X, Heart,
 
 const API_BASE = 'http://localhost:4000/api';
 
-//the main app component
+// Main App Component
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [activePage, setActivePage] = useState('dashboard');
@@ -1105,102 +1105,183 @@ function ComparisonCard({ property }) {
 }
 
 function MapView({ properties }) {
-  const countyPositions = {
-    'Manhattan': { x: 48, y: 35 },
-    'Brooklyn': { x: 62, y: 58 },
-    'Queens': { x: 72, y: 45 },
-    'Bronx': { x: 52, y: 18 },
-    'Staten Island': { x: 28, y: 72 }
+  const GOOGLE_MAPS_KEY = import.meta.env.map_api_key || 'AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8';
+
+  // Generate markers parameter for Google Maps Static API
+  const generateMarkersUrl = () => {
+    if (!properties || properties.length === 0) return '';
+    
+    // NYC center coordinates
+    const center = '40.7128,-74.0060';
+    const zoom = '11';
+    
+    // Create markers string - color code by price
+    const markers = properties.map(property => {
+      const color = property.price < 350000 ? 'green' : 
+                    property.price < 500000 ? 'blue' : 'red';
+      return `markers=color:${color}%7Clabel:$%7C${property.latitude},${property.longitude}`;
+    }).join('&');
+    
+    // Note: In production, you would use your own Google Maps API key
+    // For this demo, we'll show an embedded map with property list overlay
+    return `https://www.google.com/maps/embed/v1/view?key=YOUR_API_KEY_HERE&center=${center}&zoom=${zoom}`;
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">NYC Housing Map</h2>
-      <div className="relative bg-blue-50 rounded-lg overflow-hidden border-2 border-blue-200" style={{ height: '600px' }}>
-        
-        {/* NYC Borough Map SVG Background */}
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          {/* Water/Background */}
-          <rect width="100" height="100" fill="#e0f2fe" />
-          
-          {/* Staten Island */}
-          <path d="M 20,65 L 18,70 L 20,75 L 25,78 L 30,77 L 35,73 L 35,68 L 30,65 Z" 
-                fill="#94a3b8" stroke="#475569" strokeWidth="0.3" />
-          <text x="27" y="72" fontSize="3" fill="#1e293b" fontWeight="bold">Staten Island</text>
-          
-          {/* Brooklyn */}
-          <path d="M 50,50 L 48,55 L 50,62 L 55,65 L 62,66 L 68,64 L 72,60 L 72,54 L 68,50 L 60,48 Z" 
-                fill="#94a3b8" stroke="#475569" strokeWidth="0.3" />
-          <text x="58" y="58" fontSize="3" fill="#1e293b" fontWeight="bold">Brooklyn</text>
-          
-          {/* Queens */}
-          <path d="M 65,35 L 72,38 L 78,40 L 82,45 L 82,52 L 78,56 L 72,54 L 68,50 L 65,45 Z" 
-                fill="#94a3b8" stroke="#475569" strokeWidth="0.3" />
-          <text x="72" y="47" fontSize="3" fill="#1e293b" fontWeight="bold">Queens</text>
-          
-          {/* Manhattan */}
-          <path d="M 45,20 L 42,28 L 43,38 L 45,45 L 48,48 L 52,48 L 54,42 L 54,32 L 52,24 L 48,20 Z" 
-                fill="#94a3b8" stroke="#475569" strokeWidth="0.3" />
-          <text x="46" y="36" fontSize="3" fill="#1e293b" fontWeight="bold">Manhattan</text>
-          
-          {/* Bronx */}
-          <path d="M 48,12 L 45,18 L 46,24 L 50,28 L 55,30 L 60,28 L 62,23 L 60,17 L 55,14 Z" 
-                fill="#94a3b8" stroke="#475569" strokeWidth="0.3" />
-          <text x="52" y="21" fontSize="3" fill="#1e293b" fontWeight="bold">Bronx</text>
-          
-          {/* Water details */}
-          <path d="M 40,48 Q 35,50 30,55" stroke="#3b82f6" strokeWidth="0.5" fill="none" opacity="0.3" />
-          <path d="M 54,48 Q 58,52 62,55" stroke="#3b82f6" strokeWidth="0.5" fill="none" opacity="0.3" />
-        </svg>
-
-        {/* Property Markers */}
-        {properties.map((property, idx) => {
-          const pos = countyPositions[property.county] || { x: 50, y: 50 };
-          const offset = (idx % 5) * 2 - 4; // Spread markers
-          return (
-            <div
-              key={property.id}
-              className="absolute transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer z-10"
-              style={{ 
-                left: `${pos.x + offset}%`, 
-                top: `${pos.y + offset}%` 
-              }}
-            >
-              <div className="relative">
-                <div className="w-6 h-6 bg-red-500 rounded-full border-3 border-white shadow-lg group-hover:scale-150 transition-transform flex items-center justify-center">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+      <div className="p-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <h2 className="text-2xl font-bold mb-2">NYC Housing Map</h2>
+        <p className="text-sm opacity-90">Properties shown with price-based color coding</p>
+      </div>
+      
+      <div className="p-6">
+        {/* Map Container with Interactive List */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Map Section */}
+          <div className="lg:col-span-2">
+            <div className="relative bg-gray-100 rounded-lg overflow-hidden border-2 border-gray-200" style={{ height: '600px' }}>
+              {/* Embedded Google Maps */}
+              <iframe
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                src={`https://www.google.com/maps/embed/v1/view?key=${GOOGLE_MAPS_KEY}&center=40.7128,-74.0060&zoom=11&maptype=roadmap`}>
+              </iframe>
+              
+              {/* Overlay info */}
+              <div className="absolute top-4 left-4 bg-white rounded-lg shadow-lg p-3 max-w-xs">
+                <div className="flex items-center gap-2 mb-2">
+                  <MapPin className="text-blue-600" size={20} />
+                  <span className="font-semibold text-gray-800">NYC Metro Area</span>
                 </div>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 hidden group-hover:block z-20">
-                  <div className="bg-white rounded-lg shadow-2xl p-4 whitespace-nowrap text-sm border-2 border-blue-200 min-w-max">
-                    <p className="font-bold text-blue-600 text-lg">${property.price.toLocaleString()}</p>
-                    <p className="text-gray-800 font-semibold">{property.neighborhood}</p>
-                    <p className="text-gray-600">{property.bedrooms} bed • {property.property_type}</p>
-                    <p className="text-green-600 font-semibold mt-1">${property.total_monthly_cost?.toLocaleString()}/mo</p>
+                <p className="text-xs text-gray-600 mb-2">Showing {properties.length} affordable housing units</p>
+                <div className="flex gap-3 text-xs">
+                  <div className="flex items-center gap-1">
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <span className="text-gray-600">&lt;$350k</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                    <span className="text-gray-600">$350k-$500k</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <span className="text-gray-600">&gt;$500k</span>
                   </div>
                 </div>
               </div>
             </div>
-          );
-        })}
-      </div>
-      
-      <div className="mt-6 grid grid-cols-2 md:grid-cols-5 gap-4">
-        {Object.entries(countyPositions).map(([county]) => {
-          const countyCount = properties.filter(p => p.county === county).length;
-          return (
-            <div key={county} className="flex items-center gap-2 bg-blue-50 p-3 rounded-lg">
-              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <div>
-                <p className="text-sm font-semibold text-gray-800">{county}</p>
-                <p className="text-xs text-gray-600">{countyCount} units</p>
+
+            {/* Interactive Map Links */}
+            <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <p className="text-sm text-gray-700 mb-3">
+                <strong>💡 View properties on interactive map:</strong>
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {properties.slice(0, 6).map((property, idx) => (
+                  <a
+                    key={property.id}
+                    href={`https://www.google.com/maps/search/?api=1&query=${property.latitude},${property.longitude}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs bg-white border border-blue-300 rounded px-3 py-1 hover:bg-blue-100 transition-colors"
+                  >
+                    {property.neighborhood} - ${property.price.toLocaleString()}
+                  </a>
+                ))}
+                {properties.length > 6 && (
+                  <span className="text-xs text-gray-600 px-3 py-1">+{properties.length - 6} more</span>
+                )}
+              </div>
+              <p className="text-xs text-gray-500 mt-2">Click any link to open exact location in Google Maps</p>
+            </div>
+          </div>
+
+          {/* Property List Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="bg-gray-50 rounded-lg p-4 h-[600px] overflow-y-auto">
+              <h3 className="font-semibold text-gray-800 mb-4 sticky top-0 bg-gray-50 pb-2">
+                All Properties ({properties.length})
+              </h3>
+              <div className="space-y-3">
+                {properties.map(property => {
+                  const priceColor = property.price < 350000 ? 'text-green-600' : 
+                                    property.price < 500000 ? 'text-blue-600' : 'text-red-600';
+                  return (
+                    <div key={property.id} className="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                      <div className="flex items-start justify-between mb-2">
+                        <div>
+                          <p className={`text-lg font-bold ${priceColor}`}>
+                            ${property.price.toLocaleString()}
+                          </p>
+                          <p className="text-xs text-gray-600">{property.neighborhood}</p>
+                        </div>
+                        <a
+                          href={`https://www.google.com/maps/search/?api=1&query=${property.latitude},${property.longitude}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-1 hover:bg-gray-100 rounded"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <MapPin size={16} className="text-blue-600" />
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-gray-600 mb-2">
+                        <span className="flex items-center gap-1">
+                          <Bed size={12} /> {property.bedrooms} bed
+                        </span>
+                        <span>•</span>
+                        <span>{property.county}</span>
+                      </div>
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-gray-500">{property.property_type}</span>
+                        <span className="font-semibold text-green-600">
+                          ${property.total_monthly_cost?.toLocaleString() || 'N/A'}/mo
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-          );
-        })}
-      </div>
-      
-      <div className="mt-4 text-sm text-gray-600 bg-blue-50 p-3 rounded-lg">
-        <p className="font-semibold">💡 Tip: Hover over red markers to see unit details</p>
+          </div>
+        </div>
+
+        {/* Borough Statistics */}
+        <div className="mt-6 grid grid-cols-2 md:grid-cols-5 gap-4">
+          {['Manhattan', 'Brooklyn', 'Queens', 'Bronx', 'Staten Island'].map(county => {
+            const countyProps = properties.filter(p => p.county === county);
+            const avgPrice = countyProps.length > 0 
+              ? Math.round(countyProps.reduce((sum, p) => sum + p.price, 0) / countyProps.length)
+              : 0;
+            return (
+              <div key={county} className="bg-gradient-to-br from-blue-50 to-purple-50 p-4 rounded-lg border border-blue-200">
+                <p className="text-sm font-semibold text-gray-800">{county}</p>
+                <p className="text-2xl font-bold text-blue-600">{countyProps.length}</p>
+                <p className="text-xs text-gray-600">units</p>
+                {avgPrice > 0 && (
+                  <p className="text-xs text-gray-500 mt-1">
+                    Avg: ${(avgPrice / 1000).toFixed(0)}k
+                  </p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Help Text */}
+        <div className="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+          <h4 className="font-semibold text-gray-800 mb-2">🗺️ How to use the map:</h4>
+          <ul className="text-sm text-gray-700 space-y-1">
+            <li>• Click any property link to view exact location on Google Maps</li>
+            <li>• Properties are color-coded by price range (green = most affordable)</li>
+            <li>• Use the property list on the right to browse all available units</li>
+            <li>• Borough statistics show unit count and average prices per area</li>
+          </ul>
+        </div>
       </div>
     </div>
   );

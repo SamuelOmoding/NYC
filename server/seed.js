@@ -20,6 +20,8 @@ const properties = [
     square_feet: 850,
     property_type: 'Condo',
     year_built: 1985,
+    latitude: 40.7520,
+    longitude: -73.9745,
     image_url: 'placeholder-image-1.jpg',
     description: 'Charming 2-bedroom condo in the heart of Midtown. Close to Grand Central and excellent restaurants.'
   },
@@ -33,6 +35,8 @@ const properties = [
     square_feet: 1100,
     property_type: 'Co-op',
     year_built: 1975,
+    latitude: 40.7870,
+    longitude: -73.9754,
     image_url: 'placeholder-image-2.jpg',
     description: 'Spacious 3-bedroom co-op near Central Park. Perfect for families with great school district.'
   },
@@ -46,6 +50,8 @@ const properties = [
     square_feet: 900,
     property_type: 'Condo',
     year_built: 2005,
+    latitude: 40.8116,
+    longitude: -73.9465,
     image_url: 'placeholder-image-3.jpg',
     description: 'Modern condo in historic Harlem. Walking distance to subway and local amenities.'
   },
@@ -59,6 +65,8 @@ const properties = [
     square_feet: 750,
     property_type: 'Condo',
     year_built: 2010,
+    latitude: 40.7089,
+    longitude: -74.0104,
     image_url: 'placeholder-image-4.jpg',
     description: 'Luxury 1-bedroom with stunning views. Building has gym, doorman, and rooftop terrace.'
   },
@@ -74,6 +82,8 @@ const properties = [
     square_feet: 950,
     property_type: 'Condo',
     year_built: 2015,
+    latitude: 40.7178,
+    longitude: -73.9573,
     image_url: 'placeholder-image-5.jpg',
     description: 'Hip Williamsburg condo near trendy cafes and nightlife. Easy commute to Manhattan.'
   },
@@ -87,6 +97,8 @@ const properties = [
     square_feet: 1000,
     property_type: 'Co-op',
     year_built: 1980,
+    latitude: 40.6745,
+    longitude: -73.9565,
     image_url: 'placeholder-image-6.jpg',
     description: 'Beautiful co-op near Prospect Park. Quiet tree-lined street with great community feel.'
   },
@@ -100,6 +112,8 @@ const properties = [
     square_feet: 1050,
     property_type: 'Condo',
     year_built: 2010,
+    latitude: 40.6804,
+    longitude: -73.9996,
     image_url: 'placeholder-image-7.jpg',
     description: 'Charming condo in historic Carroll Gardens. Updated finishes and original details.'
   },
@@ -113,6 +127,8 @@ const properties = [
     square_feet: 900,
     property_type: 'Condo',
     year_built: 2018,
+    latitude: 40.6884,
+    longitude: -73.9857,
     image_url: 'placeholder-image-8.jpg',
     description: 'New construction condo with modern finishes. Multiple subway lines nearby.'
   },
@@ -126,6 +142,8 @@ const properties = [
     square_feet: 950,
     property_type: 'Co-op',
     year_built: 1965,
+    latitude: 40.6710,
+    longitude: -73.9845,
     image_url: 'placeholder-image-9.jpg',
     description: 'Classic Park Slope co-op. High ceilings, hardwood floors, near F and R trains.'
   },
@@ -141,6 +159,8 @@ const properties = [
     square_feet: 950,
     property_type: 'Co-op',
     year_built: 1955,
+    latitude: 40.7210,
+    longitude: -73.8448,
     image_url: 'placeholder-image-10.jpg',
     description: 'Affordable co-op in desirable Forest Hills. Close to shops, restaurants, and LIRR.'
   },
@@ -154,6 +174,8 @@ const properties = [
     square_feet: 1100,
     property_type: 'Condo',
     year_built: 2012,
+    latitude: 40.7598,
+    longitude: -73.8303,
     image_url: 'placeholder-image-11.jpg',
     description: 'Spacious 3-bedroom condo in vibrant Flushing. Excellent Asian cuisine and shopping.'
   },
@@ -167,6 +189,8 @@ const properties = [
     square_feet: 1000,
     property_type: 'Condo',
     year_built: 2008,
+    latitude: 40.7644,
+    longitude: -73.9200,
     image_url: 'placeholder-image-12.jpg',
     description: 'Modern Astoria condo. Walkable neighborhood with diverse restaurants and cafes.'
   },
@@ -180,6 +204,8 @@ const properties = [
     square_feet: 950,
     property_type: 'Condo',
     year_built: 2016,
+    latitude: 40.7470,
+    longitude: -73.9418,
     image_url: 'placeholder-image-13.jpg',
     description: 'Waterfront condo with Manhattan skyline views. Amenities include pool and gym.'
   },
@@ -193,6 +219,8 @@ const properties = [
     square_feet: 900,
     property_type: 'Co-op',
     year_built: 1970,
+    latitude: 40.7265,
+    longitude: -73.8614,
     image_url: 'placeholder-image-14.jpg',
     description: 'Well-maintained co-op near shopping centers. Good transportation options.'
   },
@@ -208,6 +236,8 @@ const properties = [
     square_feet: 850,
     property_type: 'Co-op',
     year_built: 1940,
+    latitude: 40.8304,
+    longitude: -73.9208,
     image_url: 'placeholder-image-15.jpg',
     description: 'Classic Bronx co-op with pre-war charm. Near Yankee Stadium and subway.'
   },
@@ -221,6 +251,8 @@ const properties = [
     square_feet: 1200,
     property_type: 'Co-op',
     year_built: 1960,
+    latitude: 40.8978,
+    longitude: -73.9096,
     image_url: 'placeholder-image-16.jpg',
     description: 'Spacious Riverdale co-op with river views. Quiet residential area with good schools.'
   },
@@ -234,6 +266,8 @@ const properties = [
     square_feet: 800,
     property_type: 'Condo',
     year_built: 2000,
+    latitude: 40.8623,
+    longitude: -73.8985,
     image_url: 'placeholder-image-17.jpg',
     description: 'Affordable condo near Fordham University. Shopping and dining at your doorstep.'
   },
@@ -247,6 +281,8 @@ const properties = [
     square_feet: 900,
     property_type: 'Co-op',
     year_built: 1955,
+    latitude: 40.8570,
+    longitude: -73.8670,
     image_url: 'placeholder-image-18.jpg',
     description: 'Well-maintained co-op near beautiful parkway. Family-friendly neighborhood.'
   },
@@ -262,6 +298,8 @@ const properties = [
     square_feet: 1100,
     property_type: 'Condo',
     year_built: 2008,
+    latitude: 40.6437,
+    longitude: -74.0776,
     image_url: 'placeholder-image-19.jpg',
     description: 'Waterfront condo near ferry terminal. Convenient commute to Manhattan with harbor views.'
   },
@@ -275,6 +313,8 @@ const properties = [
     square_feet: 950,
     property_type: 'Condo',
     year_built: 1995,
+    latitude: 40.6347,
+    longitude: -74.1123,
     image_url: 'placeholder-image-20.jpg',
     description: 'Comfortable condo in quiet neighborhood. Parking included, near shopping.'
   },
@@ -288,6 +328,8 @@ const properties = [
     square_feet: 1250,
     property_type: 'Co-op',
     year_built: 1985,
+    latitude: 40.5547,
+    longitude: -74.1496,
     image_url: 'placeholder-image-21.jpg',
     description: 'Spacious co-op near beach and parks. Well-maintained building with low maintenance fees.'
   },
@@ -301,6 +343,8 @@ const properties = [
     square_feet: 1100,
     property_type: 'Condo',
     year_built: 2005,
+    latitude: 40.5947,
+    longitude: -74.1654,
     image_url: 'placeholder-image-22.jpg',
     description: 'Modern condo near Staten Island Mall. Updated kitchen and bathrooms.'
   },
@@ -316,6 +360,8 @@ const properties = [
     square_feet: 650,
     property_type: 'Condo',
     year_built: 2010,
+    latitude: 40.8405,
+    longitude: -73.9254,
     image_url: 'placeholder-image-23.jpg',
     description: 'Affordable starter condo. Perfect for first-time buyers, near express subway.'
   },
@@ -329,6 +375,8 @@ const properties = [
     square_feet: 850,
     property_type: 'Condo',
     year_built: 2014,
+    latitude: 40.7006,
+    longitude: -73.9283,
     image_url: 'placeholder-image-24.jpg',
     description: 'Trendy Bushwick condo. Up-and-coming area with great art scene and nightlife.'
   },
@@ -342,6 +390,8 @@ const properties = [
     square_feet: 900,
     property_type: 'Co-op',
     year_built: 1935,
+    latitude: 40.7527,
+    longitude: -73.8842,
     image_url: 'placeholder-image-25.jpg',
     description: 'Historic co-op in diverse Jackson Heights. Excellent international food scene.'
   }
@@ -362,8 +412,8 @@ async function seedDatabase() {
     for (const property of properties) {
       await client.query(
         `INSERT INTO properties 
-        (address, neighborhood, county, price, bedrooms, bathrooms, square_feet, property_type, year_built, image_url, description) 
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
+        (address, neighborhood, county, price, bedrooms, bathrooms, square_feet, property_type, year_built, latitude, longitude, image_url, description) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
         [
           property.address,
           property.neighborhood,
@@ -374,6 +424,8 @@ async function seedDatabase() {
           property.square_feet,
           property.property_type,
           property.year_built,
+          property.latitude,
+          property.longitude,
           property.image_url,
           property.description
         ]
