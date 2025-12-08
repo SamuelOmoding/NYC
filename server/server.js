@@ -2,17 +2,21 @@ const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
 
-const app = express();
-const PORT = 4000;
-
-// Database configuration
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'nyc_housing',
-  password: 'yosemite',
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
+
+const app = express();
+const PORT = process.env.PORT || 4000;
+// Database configuration
+// const pool = new Pool({
+//   user: 'postgres',
+//   host: 'localhost',
+//   database: 'nyc_housing',
+//   password: 'yosemite',
+//   port: 5432,
+// });
 
 // Middleware
 app.use(cors());

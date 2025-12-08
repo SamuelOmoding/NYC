@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Home, Calculator, Search, Map, BarChart3, User, LogOut, Menu, X, Heart, DollarSign, Bed, MapPin, TrendingUp, Info, HelpCircle } from 'lucide-react';
 
-const API_BASE = 'http://localhost:4000/api';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
 
 // Main App Component
 export default function App() {
