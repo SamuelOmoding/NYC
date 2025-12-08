@@ -1,9 +1,9 @@
 {
-    "name": "nyc-housing-frontend",
-    "version": "1.0.0",
-    "description": "NYC Affordable Housing Finder Frontend",
-    "type": "module",
-    "scripts": {
+  "name": "nyc-housing-frontend",
+  "version": "1.0.0",
+  "description": "NYC Affordable Housing Finder Frontend",
+  "type": "module",
+  "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
