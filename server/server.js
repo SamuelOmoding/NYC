@@ -39,6 +39,38 @@ app.use(cors({
 }));
 app.use(express.json());
 
+const geoip = require('geoip-lite');
+const UAParser = require('ua-parser-js');
+
+// Middleware to log visitor info
+app.use((req, res, next) => {
+  // Get IP address
+  const ip =
+    req.headers['x-forwarded-for'] ||
+    req.connection.remoteAddress ||
+    req.socket.remoteAddress;
+
+  // GeoIP lookup
+  const geo = geoip.lookup(ip);
+
+  // User agent parsing
+  const parser = new UAParser(req.headers['user-agent']);
+  const device = parser.getResult();
+
+  console.log('Visitor Info:');
+  console.log({
+    ip,
+    location: geo,
+    device: {
+      browser: device.browser,
+      os: device.os,
+      type: device.device.type
+    }
+  });
+
+  next();
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
