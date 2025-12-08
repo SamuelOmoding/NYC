@@ -1,6 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 
 const express = require('express');
 const cors = require('cors');
@@ -8,7 +5,7 @@ const { Pool } = require('pg');
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://your-frontend-url.up.railway.app', // Add your Railway frontend URL
+  'https://mellow-flow-production-f594.up.railway.app/', 
 ];
 
 const pool = new Pool({
