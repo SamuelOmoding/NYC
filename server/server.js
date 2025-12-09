@@ -5,8 +5,8 @@ const { Pool } = require('pg');
 const allowedOrigins = [
   'http://localhost:5173',
   'https://mellow-flow-production-f594.up.railway.app',
-  process.env.CLIENT_URL, // Add client URL from environment variable
-].filter(Boolean); // Remove undefined values
+  process.env.CLIENT_URL,
+].filter(Boolean);
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -39,37 +39,6 @@ app.use(cors({
 }));
 app.use(express.json());
 
-const geoip = require('geoip-lite');
-const UAParser = require('ua-parser-js');
-
-// Middleware to log visitor info
-app.use((req, res, next) => {
-  // Get IP address
-  const ip =
-    req.headers['x-forwarded-for'] ||
-    req.connection.remoteAddress ||
-    req.socket.remoteAddress;
-
-  // GeoIP lookup
-  const geo = geoip.lookup(ip);
-
-  // User agent parsing
-  const parser = new UAParser(req.headers['user-agent']);
-  const device = parser.getResult();
-
-  console.log('Visitor Info:');
-  console.log({
-    ip,
-    location: geo,
-    device: {
-      browser: device.browser,
-      os: device.os,
-      type: device.device.type
-    }
-  });
-
-  next();
-});
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -217,8 +186,8 @@ app.post('/api/calculator/budget', (req, res) => {
     const monthlyGrossIncome = parseFloat(annualSalary) / 12;
     const monthlyDebt = parseFloat(monthlyDebts);
     const down = parseFloat(downPayment);
-    const rate = parseFloat(interestRate) / 100 / 12; // Monthly interest rate
-    const term = parseInt(loanTerm) * 12; // Loan term in months
+    const rate = parseFloat(interestRate) / 100 / 12;
+    const term = parseInt(loanTerm) * 12;
 
     // DTI calculation (max 43% for housing + debts)
     const maxMonthlyPayment = monthlyGrossIncome * 0.43 - monthlyDebt;
@@ -229,7 +198,7 @@ app.post('/api/calculator/budget', (req, res) => {
     const maxLoanAmount = maxMonthlyPayment * (Math.pow(1 + rate, term) - 1) / (rate * Math.pow(1 + rate, term));
 
     const maxHomePrice = maxLoanAmount + down;
-    const minHomePrice = maxHomePrice * 0.5; // Suggest a range
+    const minHomePrice = maxHomePrice * 0.5;
 
     const dti = ((monthlyDebt / monthlyGrossIncome) * 100).toFixed(2);
 
@@ -251,10 +220,10 @@ app.post('/api/calculator/budget', (req, res) => {
 // Helper function to calculate monthly costs
 function calculateMonthlyCosts(property) {
   const price = property.price;
-  const downPayment = price * 0.2; // 20% down
+  const downPayment = price * 0.2;
   const loanAmount = price - downPayment;
-  const interestRate = 0.065 / 12; // 6.5% annual, monthly
-  const loanTermMonths = 30 * 12; // 30 years
+  const interestRate = 0.065 / 12;
+  const loanTermMonths = 30 * 12;
 
   // Mortgage payment calculation
   const mortgage = loanAmount * (interestRate * Math.pow(1 + interestRate, loanTermMonths)) /
